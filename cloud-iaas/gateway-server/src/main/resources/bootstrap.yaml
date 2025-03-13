@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    nacos:
+      server-addr: 192.168.197.129:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace: e1c57a5d-8bfd-4c30-8344-f1fd63e38007
+        group: A_GROUP
+        service: ${spring.application.name}
+      config:
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        prefix: ${spring.application.name}
+        file-extension: yaml  #需要和nacos中的一样，yaml或者yml
+  profiles:
+    active: dev #多环境配置开启，dev模式
+
+#################nacos远程配置文件配置###################
+#server:
+#  port: 80
+#spring:
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true #开启动态路由
+#  redis:
+#    host: 192.168.197.129
+#    port: 6380
+#    password: 123456
+#gateway:
+#  white:
+#    allow-url:
+#      - /dologin  #登录请求路径，需要放行
+#      - /free     #占位符，表示可以写多个白名单路径
+
+

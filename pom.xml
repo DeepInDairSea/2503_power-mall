@@ -34,6 +34,7 @@
         <hutool_version>5.8.2</hutool_version>
         <springfox_version>3.0.0</springfox_version>
         <common-base_version>1.0-SNAPSHOT</common-base_version>
+        <fastjson_version>1.2.80</fastjson_version>
     </properties>
     <dependencies>
 <!--        专门读取bootstrap的依赖，每个模块都要使用这个，所以在dependencies中声明-->
@@ -82,7 +83,7 @@
             <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
+                <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid_version}</version>
             </dependency>
 <!--            第三方工具库hutool-->
@@ -102,6 +103,11 @@
                 <groupId>com.zkh</groupId>
                 <artifactId>common-base</artifactId>
                 <version>${common-base_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson_version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
