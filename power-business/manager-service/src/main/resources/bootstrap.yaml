@@ -1,0 +1,37 @@
+
+spring:
+  application:
+    name: manager-service
+  cloud:
+    nacos:
+      server-addr: 192.168.197.129:8848
+      username: nacos
+      password: nacos
+      discovery:
+        namespace:  e1c57a5d-8bfd-4c30-8344-f1fd63e38007
+        group:  A_GROUP
+        service: ${spring.application.name}
+      config:
+        namespace:  ${spring.cloud.nacos.discovery.namespace}
+        group:  ${spring.cloud.nacos.discovery.group}
+        prefix: ${spring.application.name}
+        file-extension:   yaml
+        shared-configs:
+          - application-dev.yaml
+
+  profiles:
+    active: dev
+###########################nacos 远程配置文件############################
+#server:
+#  port: 8081
+#swagger3:
+#  base-package: com.zkh.controller
+#  name: zkh
+#  url:  https://www.powernode.com
+#  email:  1280546775@qq.com
+#  title:  后台管理系统-系统管理模块接口
+#  description:  实现后台管理系统的所有接口，根路径/manager-service
+#  license:  zkh
+#  license-url:  https://www.powernode.com
+#  terms-of-service-url: https://www.powernode.com
+#  version: 1.0

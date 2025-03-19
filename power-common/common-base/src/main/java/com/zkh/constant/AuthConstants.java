@@ -6,7 +6,7 @@ public interface AuthConstants {
     //token的格式前缀
     String BEARER = "bearer ";
     //
-    String REDIS_LOGIN_PREFIX = "login_token";
+    String REDIS_LOGIN_PREFIX = "login_token: ";
     //登录url
 //    String LOGIN_URL = "/auth-server/doLogin";
     String LOGIN_URL = "/doLogin";
@@ -20,4 +20,6 @@ public interface AuthConstants {
     String SYS_USER_LOGIN = "sysUserLogin";
     //token过期时间、6小时
     Long EXPIRE_TIME = 21600L;
+    //token续约阈值、1小时
+    Long REDIS_EXPIRED_THRESHOLD_TIME = 3600L;
 }

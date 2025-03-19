@@ -51,8 +51,8 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(http);
 //        //关闭跨域请求
         http.csrf().disable();
-//        //关闭跨站请求
-        http.cors().disable();
+//        //关闭跨站请求资源共享
+//        http.cors().disable();
         //要求所有请求都要走这个认证流程
         http.authorizeRequests().anyRequest().authenticated();
         //关闭session使用策略
@@ -194,4 +194,17 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public CorsWebFilter corsWebFilter() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(Arrays.asList("*"));
+//        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+//        config.setAllowedHeaders(Arrays.asList("*"));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+//        source.registerCorsConfiguration("/**", config);
+//
+//        return new CorsWebFilter((CorsConfigurationSource) source);
+//    }
 }

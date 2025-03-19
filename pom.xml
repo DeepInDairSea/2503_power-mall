@@ -34,6 +34,7 @@
         <hutool_version>5.8.2</hutool_version>
         <springfox_version>3.0.0</springfox_version>
         <common-base_version>1.0-SNAPSHOT</common-base_version>
+        <common-core_version>1.0-SNAPSHOT</common-core_version>
         <fastjson_version>1.2.80</fastjson_version>
     </properties>
     <dependencies>
@@ -108,6 +109,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zkh</groupId>
+                <artifactId>common-core</artifactId>
+                <version>${common-core_version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
