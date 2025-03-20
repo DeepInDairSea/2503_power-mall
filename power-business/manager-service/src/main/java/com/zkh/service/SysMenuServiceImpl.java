@@ -5,12 +5,15 @@ import com.zkh.domain.SysMenu;
 import com.zkh.mapper.SysMenuMapper;
 import com.zkh.service.imp.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@CacheConfig(cacheNames = "com.zkh.service.SysMenuServiceImpl")   //权限改动的少，查询的频率高，所以给权限加进缓存
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements SysMenuService{
     @Autowired
     private SysMenuMapper sysMenuMapper;
@@ -20,6 +23,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
      * @return
      */
     @Override
+    @Cacheable(key = "#loginUserId")    //缓存的key ,把这个查询的结果根据loginUserId存redis中
     public Set<SysMenu> queryUserMenuPermsByUserId(Long loginUserId) {
 //        SysMenu sysMenu = sysMenuMapper.selectById(loginUserId);
         Set<SysMenu> userMenus = sysMenuMapper.queryUserMenuPermsByUserId(loginUserId);

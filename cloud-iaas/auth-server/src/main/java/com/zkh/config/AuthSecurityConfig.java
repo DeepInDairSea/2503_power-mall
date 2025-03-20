@@ -8,7 +8,6 @@ import com.zkh.constant.HttpConstants;
 import com.zkh.impl.SecurityUserDetailsServiceImpl;
 import com.zkh.model.LoginResult;
 import com.zkh.model.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -24,6 +23,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import javax.annotation.Resource;
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.UUID;
@@ -32,9 +32,11 @@ import java.util.UUID;
 @Configuration
 @EnableWebSecurity
 public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
+//    @Autowired
+    @Resource
     private SecurityUserDetailsServiceImpl securityUserDetailsServiceImpl;
-    @Autowired
+//    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
 

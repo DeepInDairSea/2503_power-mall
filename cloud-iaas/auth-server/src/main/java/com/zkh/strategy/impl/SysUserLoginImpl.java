@@ -9,17 +9,21 @@ import com.zkh.model.SecurityUserDetailsImpl;
 import com.zkh.strategy.LoginStrategyService;
 import com.zkh.constant.AuthConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service(value = AuthConstants.SYS_USER_LOGIN)
+@CacheConfig(cacheNames = "com.zkh.strategy.impl.SysUserLoginImpl")
 public class SysUserLoginImpl implements LoginStrategyService {
     @Autowired
     private LoginSysUserMapper loginSysUserMapper;
 
     @Override
+    @Cacheable(key = "#username")
     public UserDetails getUserDetails(String username) {
 //        LoginSysUser loginSysUser1 = new LoginSysUser();
 //        String username1 = loginSysUser1.getUsername();
