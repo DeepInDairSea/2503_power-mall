@@ -81,7 +81,8 @@ public class SysMenu implements Serializable {
      */
     @TableField(exist = false)
     @ApiModelProperty(value = "子节点")
-    private Set<SysMenu> menuSet;
+//    private Set<SysMenu> menuSet;
+    private Set<SysMenu> list;
 
     private static final long serialVersionUID = 1L;
 }

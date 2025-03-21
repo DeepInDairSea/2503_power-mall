@@ -34,31 +34,33 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     /***
      *我们这里默认只有两个层级
      */
-//    private Set<SysMenu> translationTree(Set<SysMenu> userMenuPerms, Long pid) {
-//        //查询出没有父节点的根节点
-//        Set<SysMenu> roots = userMenuPerms.stream()
-//                .filter(mPerms -> mPerms.getParentId().equals(pid))
-//                .collect(Collectors.toSet());
-//        //循环遍历出每个根节点的子节点
-//        roots.forEach(root -> {
-//            Set<SysMenu> child = userMenuPerms.stream().filter(menu -> menu.getParentId().equals(root.getMenuId())).collect(Collectors.toSet());
-//            root.setMenuSet(child);
-//        });
-//        return roots;
-//    }
+    private Set<SysMenu> translationTree(Set<SysMenu> userMenuPerms, Long pid) {
+        //查询出没有父节点的根节点
+        Set<SysMenu> roots = userMenuPerms.stream()
+                .filter(mPerms -> mPerms.getParentId().equals(pid))
+                .collect(Collectors.toSet());
+        //循环遍历出每个根节点的子节点
+        roots.forEach(root -> {
+            Set<SysMenu> child = userMenuPerms.stream().filter(menu -> menu.getParentId().equals(root.getMenuId())).collect(Collectors.toSet());
+            root.setList(child);
+        });
+        return roots;
+    }
     /**
      * 默认不知道层级有多少
      * 递归
      */
-    private Set<SysMenu> translationTree(Set<SysMenu> userMenus,Long pid){
-        //过滤出根节点
-        Set<SysMenu> roots = userMenus.stream()
-                .filter(menu -> menu.getParentId().equals(pid))
-                .collect(Collectors.toSet());
-        //遍历根节点的子节点
-        roots.forEach(root -> {
-            root.setMenuSet(translationTree(userMenus,root.getMenuId()));
-        });
-        return roots;
-    }
+//    private Set<SysMenu> translationTree(Set<SysMenu> userMenus,Long pid){
+//        //过滤出根节点
+//        Set<SysMenu> roots = userMenus.stream()
+//                .filter(menu -> menu.getParentId().equals(pid))
+//                .collect(Collectors.toSet());
+//        //遍历根节点的子节点
+//        roots.forEach(root -> {
+////            root.setMenuSet(translationTree(userMenus,root.getMenuId()));
+//            root.setList(translationTree(userMenus,root.getMenuId()));
+//        });
+////        roots.forEach(r -> r.setList(translationTree(userMenus,r.getMenuId())));
+//        return roots;
+//    }
 }

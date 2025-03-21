@@ -63,4 +63,11 @@ public class Result<T> implements Serializable {
         result.setData(null);
         return result;
     }
+
+    public static Result<String> handle(Boolean flag) {
+        if (flag) {
+            return Result.success(null);
+        }
+        return Result.fail(BusinessEnum.OPERATION_FAIL);
+    }
 }

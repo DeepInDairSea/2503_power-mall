@@ -6,12 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
     * 系统用户
@@ -82,6 +84,14 @@ public class SysUser implements Serializable {
     @TableField(value = "shop_id")
     @ApiModelProperty(value="用户所在的商城Id")
     private Long shopId;
+    /***
+     *添加系统管理员时需要选择角色,前端名字叫roleIdList
+     * 但是数据库表中没有，所以让mybatis plus不去做这个属性和对应数据库表的字段对应
+     * 就是告诉mybatis plus 我这个属性不在数据库表中，没有对应的数据库表字段
+     */
+    @TableField(exist = false)
+    @ApiModelProperty("角色Id集合")
+    private List<Long> roleIdList;
 
     private static final long serialVersionUID = 1L;
 }

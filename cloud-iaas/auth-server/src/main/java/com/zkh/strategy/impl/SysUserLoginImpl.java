@@ -3,11 +3,11 @@ package com.zkh.strategy.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.zkh.constant.AuthConstants;
 import com.zkh.domain.LoginSysUser;
 import com.zkh.mapper.LoginSysUserMapper;
 import com.zkh.model.SecurityUserDetailsImpl;
 import com.zkh.strategy.LoginStrategyService;
-import com.zkh.constant.AuthConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -68,7 +68,7 @@ public class SysUserLoginImpl implements LoginStrategyService {
             if (CollectionUtil.isNotEmpty(perms) && perms.size() != 0) {
                 securityUserDetails.setPerms(perms);
             }
-            System.out.println("aaaaa");
+//            System.out.println("aaaaa");
             return securityUserDetails;
         }
         //用户为空 返回null
