@@ -6,4 +6,7 @@ public interface SysUserService extends IService<SysUser>{
 
 
     Integer saveSysUser(SysUser sysUser);
+
+
+    SysUser querySysUserAndRoleListById(Long l);
 }

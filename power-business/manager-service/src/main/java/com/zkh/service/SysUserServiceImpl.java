@@ -1,10 +1,13 @@
 package com.zkh.service;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.nacos.common.utils.CollectionUtils;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zkh.domain.SysUser;
 import com.zkh.domain.SysUserRole;
 import com.zkh.mapper.SysUserMapper;
+import com.zkh.mapper.SysUserRoleMapper;
 import com.zkh.service.imp.SysUserRoleService;
 import com.zkh.service.imp.SysUserService;
 import com.zkh.util.AuthUtils;
@@ -13,15 +16,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
-    //    @Autowired
-//    private SysUserRoleMapper sysUserRoleMapper;
+
     @Autowired
     private SysUserRoleService sysUserRoleService;
+
+
+    @Autowired
+    private SysUserRoleMapper sysUserRoleMapper;
 
     /**
      * 前端传到controller的数据
@@ -68,5 +76,26 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //新增角色失败 则返回0
 
         return insertCount;
+    }
+
+    //通过sysUser 的id查询用户的info和用户的角色
+    @Override
+    public SysUser querySysUserAndRoleListById(Long l) {
+//        SysUser sysUser = sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserId, l));
+        SysUser sysUser = sysUserMapper.selectById(l);
+        List<SysUserRole> sysUserRoles = sysUserRoleMapper.selectList(new LambdaQueryWrapper<SysUserRole>()
+                .eq(SysUserRole::getUserId, l));
+//        ArrayList<Long> roleIdList = new ArrayList<>();
+//        sysUserRoles.forEach(sysUserRole -> {
+//            roleIdList.add(sysUserRole.getRoleId());
+//        });
+        if (CollectionUtils.isNotEmpty(sysUserRoles)&&sysUserRoles.size()!=0){
+            List<Long> roleIdList = sysUserRoles.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
+            if (CollectionUtils.isNotEmpty(roleIdList)&&roleIdList.size()!=0){
+                sysUser.setRoleIdList(roleIdList);
+            }
+        }
+//        String[] strings = null;
+        return sysUser;
     }
 }
